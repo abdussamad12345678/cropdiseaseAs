@@ -1,0 +1,22 @@
+import pickle
+from sklearn.ensemble import RandomForestClassifier
+import pandas as pd
+
+# same data as your project
+data = pd.DataFrame({
+    "temperature": [25,30,28,35,22,26,29,33,27,31],
+    "humidity": [80,60,85,40,90,75,88,50,82,55],
+    "rainfall": [10,0,20,0,15,5,12,0,18,0],
+    "disease": [1,0,1,0,1,0,1,0,1,0]
+})
+
+X = data[["temperature","humidity","rainfall"]]
+y = data["disease"]
+
+model = RandomForestClassifier()
+model.fit(X, y)
+
+with open("model.pkl", "wb") as f:
+    pickle.dump(model, f)
+
+print("✅ model.pkl created")
